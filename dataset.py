@@ -38,7 +38,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 train_sentences = x_train.to_numpy()
 
 train_labels = y_train.to_numpy()
-print(train_sentences[0])
+print(len(train_sentences))
+print(train_sentences[31427])
 test_sentences = x_test.to_numpy()
 test_labels = y_test.to_numpy()
 int32 = np.int32
@@ -47,9 +48,9 @@ test_labels = test_labels.astype(int32)
 
 
 # Lưu mảng vào tệp
-#np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_sentences.txt", train_sentences, fmt="%s", encoding='utf-8')
-#np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_sentences.txt", test_sentences, fmt="%s", encoding='utf-8')
-#np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_labels.txt", train_labels, fmt="%d", encoding='utf-8')
-#np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt", train_labels, fmt="%d", encoding='utf-8')
+np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_sentences.txt", train_sentences, fmt="%s", encoding='utf-8')
+np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_sentences.txt", test_sentences, fmt="%s", encoding='utf-8')
+np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_labels.txt", train_labels, fmt="%d", encoding='utf-8')
+np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt", train_labels, fmt="%d", encoding='utf-8')
 
 

@@ -5,11 +5,31 @@ from keras.models import Model
 from keras.layers import Embedding, Conv1D, MaxPooling1D, GlobalMaxPooling1D, Dense, concatenate, Input
 
 
+# Đường dẫn đến tệp txt
+file_path = "C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_sentences.txt"
 
-file_path="C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_labels.txt"
-train_labels = np.loadtxt(file_path, dtype=int)
-train_setences="C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_sentences.txt"
-test_sentences="C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_sentences.txt"
+# Mở tệp và đọc nội dung vào biến
+with open(file_path, 'r', encoding='utf-8') as file:
+    content = file.read()
+
+# Tách nội dung thành các phần tử của mảng (ví dụ: tách theo dòng)
+lines = content.split('\n')
+
+# Chuyển đổi thành mảng NumPy
+train_setences = np.array(lines)
+train_setences = np.delete(train_setences, -1)
+
+
+file_path="C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_sentences.txt"
+with open(file_path, 'r', encoding='utf-8') as file:
+    content = file.read()
+
+# Tách nội dung thành các phần tử của mảng (ví dụ: tách theo dòng)
+lines = content.split('\n')
+
+# Chuyển đổi thành mảng NumPy
+test_sentences = np.array(lines)
+test_sentences = np.delete(test_sentences, -1)
 vocab_size = 30000
 embedding_dim = 300
 max_len = 1000
@@ -23,7 +43,7 @@ test_sequences = tokenizer.texts_to_sequences(test_sentences)
 padded_test_sequences = pad_sequences(test_sequences, maxlen = max_len, truncating='post', padding = 'post')
 
 
-filters = 64
+
 kernel_size = 3
 pool_size = 2
 lstm_units = 128
@@ -88,8 +108,6 @@ file_path="C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_labels.txt"
 train_labels = np.loadtxt(file_path, dtype=int)
 file_path="C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt"
 test_labels = np.loadtxt(file_path, dtype=int)
-print(len(padded_train_sequences))
-print(len(train_labels))
 
 #Huấn luyện mô hình
 #history = model.fit(padded_train_sequences, train_labels,batch_size = 512, epochs=5, validation_data=(padded_test_sequences, test_labels))
