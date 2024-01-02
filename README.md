@@ -10,6 +10,7 @@ Train
     Thay đổi đường dẫn của file train.py từ các file được lưu ở trên 
     Chạy file train.py để được model
     Chúng tôi đã train trước và có thể tải ở https://drive.google.com/drive/folders/1S5s_od7Z52j3cCv29vaZoNeXsGosAi-C
+    Lưu ý nếu train thì hãy xóa file tokenizer.pkl và chạy .Nếu không train thì hãy để lại file này
 Test
 
     Thay đổi đường dẫn trong file test.py để có thể chạy
