@@ -51,6 +51,6 @@ test_labels = test_labels.astype(int32)
 np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_sentences.txt", train_sentences, fmt="%s", encoding='utf-8')
 np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_sentences.txt", test_sentences, fmt="%s", encoding='utf-8')
 np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/train_labels.txt", train_labels, fmt="%d", encoding='utf-8')
-np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt", train_labels, fmt="%d", encoding='utf-8')
+np.savetxt("C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt", test_labels, fmt="%d", encoding='utf-8')
 
 
