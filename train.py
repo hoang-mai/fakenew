@@ -103,5 +103,5 @@ file_path="C:/Users/Laptop/PycharmProjects/pythonProject1/data/test_labels.txt"
 test_labels = np.loadtxt(file_path, dtype=int)
 
 #Huấn luyện mô hình
-history = model.fit(padded_train_sequences, train_labels,batch_size = 512, epochs=5, validation_data=(padded_test_sequences, test_labels))
+history = model.fit(padded_train_sequences, train_labels,batch_size = 512, epochs=3, validation_data=(padded_test_sequences, test_labels))
 model.save("C:/Users/Laptop/PycharmProjects/pythonProject1/FakeNewDetectionCNN16layers.h5")
