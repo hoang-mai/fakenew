@@ -1,45 +1,56 @@
+from tkinter import Tk, Label, Text, Button, StringVar, ttk
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 import pickle
-import tkinter as tk
+
 
 def kiem_tra_text():
-    input_text = entry.get()
-    # Thực hiện xử lý kiểm tra với input_text ở đây
-    # Ví dụ: In kết quả ra terminal
+    input_text = entry.get("1.0", "end-1c")
+
     new_texts = [input_text]
-    with open("tokenizer.pkl", "rb") as file:
+    with open("C:/Users/Laptop/PycharmProjects/fakenew/tokenizer.pkl", "rb") as file:
         tokenizer = pickle.load(file)
     new_sequences = tokenizer.texts_to_sequences(new_texts)
     new_padded_sequences = pad_sequences(new_sequences, maxlen=1000, padding='post')
 
-    # Đường dẫn đến tệp tin mô hình .h5
-    model_path = "C:/Users/Laptop/PycharmProjects/pythonProject1/FakeNewDetectionCNN16layers.h5"
-
-    # Tải mô hình từ tệp tin
+    model_path = "C:/Users/Laptop/PycharmProjects/fakenew/FakeNewDetectionCNN16layers.h5"
     model = load_model(model_path)
     predictions = model.predict(new_padded_sequences)
-    print("Predictions:", predictions)
-    if predictions[0][0] > 0.5:
-        confidence = predictions[0][0] * 100
-        return f"Thông tin trên là đúng sự thật ({confidence:.2f}%)"
+
+    confidence = predictions[0][0]
+    result_var.set(f"Đánh giá: {confidence:.2f}")
+    if confidence > 0.5:
+        result_label.config(text=f"Thông tin trên là đúng sự thật", foreground="green")
+        ket_qua_var.set("Bài báo trên là đúng sự thật")
     else:
-        confidence = (predictions[0][0]) * 100
-        return f"Thông tin trên là sai sự thật ({confidence:.2f}%)"
+        result_label.config(text=f"Thông tin trên là sai sự thật", foreground="red")
+        ket_qua_var.set("Bài báo trên là sai sự thật")
 
 
 # Tạo cửa sổ giao diện
-root = tk.Tk()
+root = Tk()
 root.title("Ứng dụng Kiểm tra Text")
 
-# Tạo khung nhập văn bản
-entry = tk.Entry(root, width=30)
+# Tạo label tiêu đề
+title_label = Label(root, text="Kiểm tra Tin Tức", font=("Arial", 16))
+title_label.pack(pady=10)
+
+# Tạo khung nhập văn bản (Text) với thanh cuộn
+entry = Text(root, width=70, height=10, wrap="word")  # wrap="word" cho phép xuống dòng theo từ
 entry.pack(pady=10)
 
 # Tạo nút kiểm tra và liên kết với hàm kiem_tra_text
-button = tk.Button(root, text="Kiểm tra", command=kiem_tra_text)
-button.pack()
+check_button = Button(root, text="Kiểm tra", command=kiem_tra_text)
+check_button.pack()
 
+# Hiển thị kết quả
+result_var = StringVar()
+result_label = Label(root, textvariable=result_var, font=("Arial", 14))
+result_label.pack(pady=10)
+
+ket_qua_var = StringVar()
+ket_qua_label = Label(root, textvariable=ket_qua_var, font=("Arial", 14))
+ket_qua_label.pack(pady=10)
 # Bắt đầu vòng lặp sự kiện
 root.mainloop()
